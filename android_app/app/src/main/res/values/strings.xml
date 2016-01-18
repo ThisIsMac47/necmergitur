@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Crowd Rescue</string>
+    <string name="action_settings">Options</string>
+    <string name="Quitter">Quitter</string>
+    <array name="dispo" >
+        <item>Disponible</item> 1
+        <item>En cas de besoin</item> 2
+        <item>Non disponible</item> 0
+    </array>
+</resources>
