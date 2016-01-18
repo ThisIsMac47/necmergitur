@@ -1,6 +1,5 @@
 # Hackaton "Nec Mergitur" du 15/01 au 17/01
 
-## Hackaton
 Le hackaton Nec Mergitur a été organisé après les attentats du 13/11/15 pour trouver des solutions pour renforcer la sécurité et améliorer les process dans des moments de crise.
 
 ## Croix Rouge
@@ -15,7 +14,7 @@ Process a amélioré :
   *  Constitue une équipe
   *  Leur renvoie des informations 1 par 1 (ou ce rejoindre, quel matériel prendre, lieu de l'evenement etc)
 * les bénévoles se rejoignent au point de rdv et vont sur l'evenement
-              
+
 Notre idée :  
 * tous les bénévoles ont une application mobile :
   * Permet de donner une disponibilité (dispo, pas dispo, en cas d'urgence)
@@ -49,6 +48,9 @@ Personellement, je me suis occupé du back-end pour intéragir avec l'applicatio
 # Resultat
 
 L'application se connecte et recupere des informations, permet de définir sa disponibilité, recois les notifications, fait répondre l'utilisateur a des questions simples puis renvoie les infos au backend + la geolocalisation.
+
+![alt text](https://github.com/ThisIsMac47/necmergitur/blob/master/android_app_rendu.png "Rendu app")
+
 
 Le backend permet d'envoyer la notification au bénévoles disponibles et forcément gérer les requetes de l'application, permet aussi de lister les utilisateurs en mission etc.
 
