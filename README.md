@@ -16,27 +16,28 @@ Process a amélioré :
   *  Leur renvoie des informations 1 par 1 (ou ce rejoindre, quel matériel prendre, lieu de l'evenement etc)
 * les bénévoles se rejoignent au point de rdv et vont sur l'evenement
               
-Notre idée :  - tous les bénévoles ont une application mobile :
-                  - Permet de donner une disponibilité (dispo, pas dispo, en cas d'urgence)
-                  - Permet de recevoir des notifications du backend et de répondre avec des forms pré-remplies etc
-                  - Envoyer la localisation du bénévole pour calculer le temps d'intervention et de monter une équipe en fonction
-                  - Faire remonter des informations (changement de situation sur intervention, besoin de renfort etc)
-              - La régulation a un backoffice qui permet de récupérer/renvoyer sur le backoffice.
-              - Un backend qui s'interface entre le backoffice et l'application.
+Notre idée :  
+* tous les bénévoles ont une application mobile :
+  * Permet de donner une disponibilité (dispo, pas dispo, en cas d'urgence)
+  * Permet de recevoir des notifications du backend et de répondre avec des forms pré-remplies etc
+  * Envoyer la localisation du bénévole pour calculer le temps d'intervention et de monter une équipe en fonction
+  * Faire remonter des informations (changement de situation sur intervention, besoin de renfort etc)
+* La régulation a un backoffice qui permet de récupérer/renvoyer sur le backoffice.
+* Un backend qui s'interface entre le backoffice et l'application.
 
 Process avec l'idée :
-              - responsable nationale / departementale qui fait descendre l'information au regulation locale
-              - la régulation crée un evenement sur le backoffice
-              - le backend envoie des notifications (en sachant qui est dispo ou pas) pour avoir des réponses valides.
-              - le backend remonte les informations en proposant des bénévoles pertinents (diplomes, localisation)
-              - la régulation modifie (ou pas) les équipes et lance l'intervention
-              - le backend envoie les informations au bénévoles (ou aller, comment, avec quoi)
-              - intervention des bénévoles
-              - si besoin une remonter d'information des bénévoles vers la régulation
-              - intervention terminé, l'application demande des infos au bénévoles (qu'est ce qui c'est passé)
-              - le backend crée un rapport d'intervention automatiquement (horaire, mobilisation, localisation, information)
-              - enregistrement de l'intervention et fin
-              
+* responsable nationale / departementale qui fait descendre l'information au regulation locale
+* la régulation crée un evenement sur le backoffice
+* le backend envoie des notifications (en sachant qui est dispo ou pas) pour avoir des réponses valides.
+* le backend remonte les informations en proposant des bénévoles pertinents (diplomes, localisation)
+* la régulation modifie (ou pas) les équipes et lance l'intervention
+* le backend envoie les informations au bénévoles (ou aller, comment, avec quoi)
+* intervention des bénévoles
+* si besoin une remonter d'information des bénévoles vers la régulation
+* intervention terminé, l'application demande des infos au bénévoles (qu'est ce qui c'est passé)
+* le backend crée un rapport d'intervention automatiquement (horaire, mobilisation, localisation, information)
+* enregistrement de l'intervention et fin
+
 ## Realisation
 
 Une partie du groupe a réalisé des mockups (cf. Crowd Rescue.pdf), vtarreau et moi même ayant pour but personnel de réaliser un prototype pour pouvoir en faire une demo.
