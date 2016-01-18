@@ -9,12 +9,12 @@ Nous nous sommes investis dans la proposition de la croix rouge francaise, qui c
 ## Le but
 
 Process a amélioré :
-              - responsable nationale / departementale qui fait descendre l'information au regulation locale
-              - la régulation (personne qui régule les bénévoles, qui les mobilisent etc)
-                  -  Appelle 1 par 1 les bénévoles pour avoir des informations (disponibilité, matériel)
-                  -  Constitue une équipe
-                  -  Leur renvoie des informations 1 par 1 (ou ce rejoindre, quel matériel prendre, lieu de l'evenement etc)
-              - les bénévoles se rejoignent au point de rdv et vont sur l'evenement
+* responsable nationale / departementale qui fait descendre l'information au regulation locale
+* la régulation (personne qui régule les bénévoles, qui les mobilisent etc)
+  *  Appelle 1 par 1 les bénévoles pour avoir des informations (disponibilité, matériel)
+  *  Constitue une équipe
+  *  Leur renvoie des informations 1 par 1 (ou ce rejoindre, quel matériel prendre, lieu de l'evenement etc)
+* les bénévoles se rejoignent au point de rdv et vont sur l'evenement
               
 Notre idée :  - tous les bénévoles ont une application mobile :
                   - Permet de donner une disponibilité (dispo, pas dispo, en cas d'urgence)
