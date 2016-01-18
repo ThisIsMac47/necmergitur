@@ -51,7 +51,6 @@ L'application se connecte et recupere des informations, permet de définir sa di
 
 ![alt text](https://github.com/ThisIsMac47/necmergitur/blob/master/android_app_rendu.png "Rendu app")
 
-
 Le backend permet d'envoyer la notification au bénévoles disponibles et forcément gérer les requetes de l'application, permet aussi de lister les utilisateurs en mission etc.
 
 Ce n'est qu'une partie du process repenser, mais sa nous a quand même pris une bonne nuit blanche à mettre en place, sachant que ne connaissions presque pas les technologies que nous avons utilisé (c'était mon cas).
