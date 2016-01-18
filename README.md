@@ -1,4 +1,4 @@
-# Hackaton Nec Mergitur from 15/01/15 to 17/01/15 at Ecole 42
+# Hackaton "Nec Mergitur" du 15/01 au 17/01
 
 ## Hackaton
 Le hackaton Nec Mergitur a été organisé après les attentats du 13/11/15 pour trouver des solutions pour renforcer la sécurité et améliorer les process dans des moments de crise.
