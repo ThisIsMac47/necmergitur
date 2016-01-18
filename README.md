@@ -1,12 +1,12 @@
-## Hackaton Nec Mergitur from 15/01/15 to 17/01/15 at Ecole 42
+# Hackaton Nec Mergitur from 15/01/15 to 17/01/15 at Ecole 42
 
-# Hackaton
+## Hackaton
 Le hackaton Nec Mergitur a été organisé après les attentats du 13/11/15 pour trouver des solutions pour renforcer la sécurité et améliorer les process dans des moments de crise.
 
-# Croix Rouge
+## Croix Rouge
 Nous nous sommes investis dans la proposition de la croix rouge francaise, qui consistait à réfléchir autour des problèmes actuels et ceux survenus pendant des crises précédentes tout en respectant les process interne déjà en place.
 
-# Le but
+## Le but
 
 Process a amélioré :
               - responsable nationale / departementale qui fait descendre l'information au regulation locale
@@ -37,7 +37,7 @@ Process avec l'idée :
               - le backend crée un rapport d'intervention automatiquement (horaire, mobilisation, localisation, information)
               - enregistrement de l'intervention et fin
               
-# Realisation
+## Realisation
 
 Une partie du groupe a réalisé des mockups (cf. Crowd Rescue.pdf), vtarreau et moi même ayant pour but personnel de réaliser un prototype pour pouvoir en faire une demo.
 
