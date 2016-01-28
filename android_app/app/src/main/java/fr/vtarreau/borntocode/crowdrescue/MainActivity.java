@@ -1,9 +1,11 @@
 package fr.vtarreau.borntocode.crowdrescue;
 
 import android.app.ActionBar;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -98,6 +100,11 @@ public class MainActivity extends FragmentActivity {
         {
             askIfAvailable(msg);
         }
+
+        Intent intentb = new Intent(this, MyGcmListenerService.class);
+        PendingIntent sender = PendingIntent.getBroadcast(this, 0, intentb, 0);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManager.cancel(sender);
 
         mRegistrationBroadcastReceiver = new BroadcastReceiver() {
             @Override

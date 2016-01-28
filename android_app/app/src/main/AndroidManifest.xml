@@ -59,6 +59,8 @@
             android:name="fr.vtarreau.borntocode.crowdrescue.RegistrationIntentService"
             android:exported="false">
         </service>
+
+
     </application>
 
 </manifest>
