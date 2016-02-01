@@ -1,0 +1,156 @@
+{
+  "degrees": [
+    {
+      "id": "2D48E747-DF73-D74E-71F8-8C42560D443C",
+      "name": "PSE2"
+    },
+    {
+      "id": "C63E1D10-D987-7A75-74DE-A0AC44323E60",
+      "name": "PSE1"
+    },
+    {
+      "id": "2D48E747-DF73-D74E-71F8-8C42560D443C",
+      "name": "PSC1"
+    },
+    {
+      "id": "C63E1D10-D987-7A75-74DE-A0AC44323E60",
+      "name": "Driver"
+    },
+    {
+      "id": "8438D303-92D4-C7E4-81D3-80E526DF1479",
+      "name": "Radio');"
+    }
+  ],
+  "users": [
+    {
+      "id": "2D48E747-DF73-D74E-71F8-8C42560D443C",
+      "name": "Vincent",
+      "age": "44",
+      "adress": "8603 In Street",
+      "mail": "scelerisque.scelerisque.dui@dapibus.co.uk",
+      "phone": "01 87 30 61 78",
+      "last_geo": "",
+      "password": "42",
+      "available": "AVAILABLE",
+      "status": "NONE",
+      "registerId": "APA91bENDzpjlSqCI2SQujXwRr0_QnHvrObLSBfjntA1IOxSYhQir2OjyqkWK4bD-jOjAT8yHkpllOhyu8KUftEhUo61MRFjmftD0mGbf6G70IWurDpzrYX9g_zsvIJbQuZ89EY6jUvN4CKQIrDd1xRmI1ui-PqfucTo8PiQouHbMubh_pWoo0Q"
+    },
+    {
+      "id": "C63E1D10-D987-7A75-74DE-A0AC44323E60",
+      "name": "Valentin",
+      "age": "43",
+      "adress": "7601 Erat Av.",
+      "mail": "eget.tincidunt.dui@perconubia.net",
+      "phone": "04 76 48 04 27",
+      "last_geo": "",
+      "password": "42",
+      "available": "AVAILABLE",
+      "status": "NONE",
+      "registerId": "APA91bG1XFsNPbemSj82brv9g7F-SlNfiFiC9G64bLH1l3_VPhUyFU6a1Ym-UxD1zMCTw0BB6X9UhE59S0ZWIwvLGmyb47kMxlrn8XgPTpMAu-O-gTuAUbSf7DO6ZF-PhT8QGxFIdW4y4Z2iOwznMl8G1S3jXpgZjV-idnO-HuojQFBrXHvJlEI"
+    },
+    {
+      "id": "8438D303-92D4-C7E4-81D3-80E526DF1479",
+      "name": "Lewis",
+      "age": "43",
+      "adress": "P.O. Box 554 5469 Tortor Ave",
+      "mail": "varius.et@sitamet.edu",
+      "phone": "08 75 02 92 62",
+      "last_geo": "",
+      "password": "42",
+      "available": "ONLY_EMERGENCY",
+      "status": "NONE",
+      "registerId": "APA91bFkzm0ULy1S_tfKCINmS0Aq-v4-iHpcarfUnd4tmyjbEvl5kTKZKRg9uf-iekMOomHcnvffmtOreYkii_yOuwuTleaQLlpFF9ub8vlF5a6YQbPk6M_odoAHZTiuGyOKjvhG4TO3B9qDk5YCbhoUgxvwOVE_CALMM3SJQKl5wxSvWpnqUIE"
+    },
+    {
+      "id": "4217408C-A601-6D54-5886-C8C7D11A508D",
+      "name": "Serena",
+      "age": "23",
+      "adress": "P.O. Box 610 6091 Nec Ave",
+      "mail": "cursus@facilisisfacilisis.edu",
+      "phone": "07 04 33 28 38",
+      "last_geo": "",
+      "password": "CKF53MFL3KC",
+      "available": "NO_AVAILABLE",
+      "status": "NONE",
+      "registerId": ""
+    },
+    {
+      "id": "BDE17581-6D2D-FD64-C08E-4B8AD59690CD",
+      "name": "Mary",
+      "age": "34",
+      "adress": "P.O. Box 866 5433 Sed Ave",
+      "mail": "litora@velarcueu.co.uk",
+      "phone": "05 52 97 25 62",
+      "last_geo": "",
+      "password": "COC00IZW1UJ",
+      "available": "NO_AVAILABLE",
+      "status": "NONE",
+      "registerId": ""
+    },
+    {
+      "id": "16A72B10-FDA0-5376-2686-12A75BAB6E6F",
+      "name": "Ima",
+      "age": "21",
+      "adress": "2114 Risus Street",
+      "mail": "purus.Duis@viverraDonectempus.net",
+      "phone": "07 68 36 02 52",
+      "last_geo": "",
+      "password": "HVS52IXP3UV",
+      "available": "NO_AVAILABLE",
+      "status": "NONE",
+      "registerId": ""
+    },
+    {
+      "id": "1CAF32EC-9094-7D29-0797-6D0BF1D951E9",
+      "name": "Riley",
+      "age": "25",
+      "adress": "435-1318 Mauris St.",
+      "mail": "hendrerit.a.arcu@ridiculusmus.edu",
+      "phone": "02 75 72 60 42",
+      "last_geo": "",
+      "password": "KYS88CCZ2VL",
+      "available": "NO_AVAILABLE",
+      "status": "NONE",
+      "registerId": ""
+    },
+    {
+      "id": "8DECC0F3-01EE-EDF1-E751-C5A94765C8B0",
+      "name": "Desirae",
+      "age": "65",
+      "adress": "966-6238 Orci St.",
+      "mail": "Fusce.diam.nunc@Maecenas.edu",
+      "phone": "03 71 53 01 44",
+      "last_geo": "",
+      "password": "FIL65GPW2GR",
+      "available": "NO_AVAILABLE",
+      "status": "NONE",
+      "registerId": ""
+    },
+    {
+      "id": "20DE881D-77D3-7E25-5A17-32B6CAECAACA",
+      "name": "Hiram",
+      "age": "42",
+      "adress": "P.O. Box 385 8446 Fusce Rd.",
+      "mail": "arcu@vel.ca",
+      "phone": "09 64 98 52 34",
+      "last_geo": "",
+      "password": "SDE26JON7ZK",
+      "available": "NO_AVAILABLE",
+      "status": "NONE",
+      "registerId": ""
+    },
+    {
+      "id": "B2ED634F-4A05-CA3F-F7A8-88B36E1A9A88",
+      "name": "Lenore",
+      "age": "44",
+      "adress": "P.O. Box 672 4747 Interdum St.",
+      "mail": "ut@auctorvitaealiquet.ca",
+      "phone": "07 21 02 48 19",
+      "last_geo": "",
+      "password": "CJW75MPQ2KU",
+      "available": "NO_AVAILABLE",
+      "status": "NONE",
+      "registerId": ");"
+    }
+  ]
+}

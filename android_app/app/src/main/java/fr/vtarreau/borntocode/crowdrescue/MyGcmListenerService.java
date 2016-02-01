@@ -42,37 +42,17 @@ public class MyGcmListenerService extends GcmListenerService {
     public void onMessageReceived(String from, Bundle data) {
         String message = data.getString("message"); //type = description
 
-                Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
-                Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
-                r.play();
+        Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+        Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
+        r.play();
 
         Log.d(TAG, "From: " + from);
         Log.d(TAG, "Message: " + message);
 
         //available/response ->id, has_stuff
 
-        if (from.startsWith("/topics/")) {
-            // message received from some topic.
-        } else {
-            // normal downstream message.
-        }
-
-        // [START_EXCLUDE]
-        /**
-         * Production applications would usually process the message here.
-         * Eg: - Syncing with server.
-         *     - Store message in local database.
-         *     - Update UI.
-         */
-
-        /**
-         * In some cases it may be useful to show a notification indicating to the user
-         * that a message was received.
-         */
         sendNotification(message);
-        // [END_EXCLUDE]
     }
-    // [END receive_message]
 
     /**
      * Create and show a simple notification containing the received GCM message.
@@ -98,20 +78,6 @@ public class MyGcmListenerService extends GcmListenerService {
 
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        //Notification notification = new Notification(R.drawable.ic_cast_dark, message,);
-
-        //Intent notificationIntent = new Intent(this, MainActivity.class);
-
-        //notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
-                //| Intent.FLAG_ACTIVITY_SINGLE_TOP);
-
-        //PendingIntent intent = PendingIntent.getActivity(this, 0,
-                //notificationIntent, 0);
-
-        //notification.setLatestEventInfo(context, title, message, intent);
-        //notification.flags |= Notification.FLAG_AUTO_CANCEL;
-        //notificationManager.notify(0, notification);
-
         notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
     }
 }

@@ -1,28 +1,24 @@
 package fr.thisismac.necmergitur;
 
 import java.io.IOException;
-import java.sql.SQLException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.j256.ormlite.dao.Dao;
-import com.j256.ormlite.dao.DaoManager;
-import com.j256.ormlite.jdbc.JdbcConnectionSource;
-import com.j256.ormlite.support.ConnectionSource;
 
-import fr.thisismac.negmergitur.msgs.ReturnMessage;
-import fr.thisismac.negmergitur.objects.Degree;
-import fr.thisismac.negmergitur.objects.User;
-import fr.thisismac.negmergitur.objects.User.AvailableState;
-import fr.thisismac.negmergitur.objects.User.StatusState;
+import fr.thisismac.necmergitur.msgs.ReturnMessage;
+import fr.thisismac.necmergitur.objects.Degree;
+import fr.thisismac.necmergitur.objects.User;
+import fr.thisismac.necmergitur.objects.User.AvailableState;
+import fr.thisismac.necmergitur.objects.User.StatusState;
 
 import static spark.Spark.*;
 
@@ -36,54 +32,62 @@ public class Core {
 
 	// Entry point for this program
 	public static void main(String[] args) {
-		new Core(args);
+		try {
+			new Core(args);
+		} catch (JsonSyntaxException | IOException e) {
+			e.printStackTrace();
+		}
 	}
-	
-	// Final data
-	public String SQL_USER = "";
-	public String SQL_PASSWD = "";
-	public String SQL_URL = "";
-	public String GAPI_KEY = "google api key";
-	public String SENDER_ID = "google project id";
-	
 	
 	// Class access
 	@Getter static Core instance;
-	@Getter static ConnectionSource connectionSource;
-
-	// ORM Interface
-	@Getter Dao<User, String> usersDao;
-	@Getter Dao<Degree, String> degreesDao;
 	
 	// Data caching
 	@Getter List<Degree> degrees;
 	@Getter List<User> users;
 
 	// Gson instance
-	public Gson gson = new GsonBuilder().serializeNulls().create();
+	public Gson gson = new GsonBuilder().serializeNulls().setPrettyPrinting().create();
 
-	public Core(String[] args) {
+	
+	// Config 
+	public String GAPI_KEY = "google api key";
+	public String PROJECT_ID = "google project id";
+
+	public Core(String[] args) throws JsonSyntaxException, IOException {
 		instance = this;
-
-		// Init DB Driver
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		try {
-			// Query data for caching
-			connectionSource = new JdbcConnectionSource(SQL_URL, SQL_USER, SQL_PASSWD);
-			usersDao = DaoManager.createDao(connectionSource, User.class);
-			users = usersDao.queryForAll();
-			degreesDao = DaoManager.createDao(connectionSource, Degree.class);
-			degrees = degreesDao.queryForAll();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		// dev mode
-		//port(4242);
 		
+		// Load Config
+		long start = System.currentTimeMillis();
+		
+		JsonObject config = gson.fromJson(new String(Files.readAllBytes(Paths.get("./config.json")), StandardCharsets.UTF_8), JsonObject.class);
+		GAPI_KEY = config.get("GAPIKEY").getAsString();
+		PROJECT_ID = config.get("PROJECT_ID").getAsString();
+		
+		// Load Data
+		JsonObject data = gson.fromJson(new String(Files.readAllBytes(Paths.get("./data.json")), StandardCharsets.UTF_8), JsonObject.class);
+		TypeToken<List<User>> usersType = new TypeToken<List<User>>(){};
+		users = gson.fromJson(data.get("users").getAsJsonArray(), usersType.getType());
+		TypeToken<List<Degree>> degreeType = new TypeToken<List<Degree>>(){};
+		degrees = gson.fromJson(data.get("degrees").getAsJsonArray(), degreeType.getType());
+		
+		for(Degree degree : degrees) {
+			for(User user : users) {
+				if (user.getId().compareTo(degree.getId()) == 0) {
+					if (user.getDegrees() == null)
+						user.setDegrees(new ArrayList<Degree>());
+					user.getDegrees().add(degree);
+					break ;
+				}
+			}
+		}
+		System.out.println("Data loaded in " + (System.currentTimeMillis() - start) + " ms");
+		
+		// setup mode
+		port(4242);
+		
+		
+		/***************************************************			 ROUTE HANDLE			******************************************************/
 		// Log all request and ip
 		before((request, response) -> {
 			System.out.println("Requested : " + request.pathInfo() + " : " + request.ip());
@@ -91,6 +95,10 @@ public class Core {
 			response.type("application/json");
 		});
 		
+		
+		get("/", (request, response) -> {
+			return gson.toJson("Hello");
+		});
 		
 		/* Login an user from his username and password (and post registerId for push notification) (String username, String password)*/
 		post("/users/login", (request, response) -> {
@@ -101,7 +109,6 @@ public class Core {
 				if (user.getName().equalsIgnoreCase(request.queryMap().get("username").value())) {
 					if (user.getPassword().equals(request.queryMap().get("password").value())) {
 						user.setRegisterId(request.queryMap("registerId").value());
-						usersDao.update(user);
 						return gson.toJson(new ReturnMessage(true, user.getId().toString()));
 					}
 					else
@@ -149,11 +156,21 @@ public class Core {
 				if (user.getId().toString().equalsIgnoreCase(request.queryMap().get("id").value())) {
 					user.setLast_geo(request.queryMap().get("location").value());
 					user.setAvailable(AvailableState.values()[Integer.parseInt(request.queryMap().get("state").value())]);
-					usersDao.update(user);
 					return gson.toJson(new ReturnMessage(true, "Your status has been updated"));
 				}
 			}
 			return gson.toJson(new ReturnMessage(false, "User not found"));
+		});
+		
+		
+		/* Request availability from all users possible (void)*/
+		get("/available/request/all", (request, response) -> {
+			for (User user : users) {
+				if (user.getAvailable() != null && user.getAvailable().ordinal() != 0 && !user.getRegisterId().isEmpty()) {
+					send_push(user, "request", "Etes-vous disponible pour être engagé sur une mission ?");
+				}
+			}
+			return gson.toJson(new ReturnMessage(true, "Availability Requested"));
 		});
 		
 		/* Request availability for this user (String uuid) */
@@ -171,16 +188,6 @@ public class Core {
 				}
 			}
 			return gson.toJson(new ReturnMessage(false, "User not found"));
-		});
-		
-		/* Request availability from all users possible (void)*/
-		get("/available/request/all", (request, response) -> {
-			for (User user : users) {
-				if (user.getAvailable().ordinal() != 0 && !user.getRegisterId().isEmpty()) {
-					send_push(user, "request", "Etes-vous disponible pour être engagé sur une mission ?");
-				}
-			}
-			return gson.toJson(new ReturnMessage(true, "Availability Requested"));
 		});
 		
 		/* Show all user that are actually engaged or ready in operation (void) */
@@ -221,11 +228,9 @@ public class Core {
 						else
 							user.setStatus(StatusState.WAITING_ORDER);
 						user.setLast_geo(request.queryMap().get("location").value());
-						usersDao.update(user);
 						return gson.toJson(new ReturnMessage(true, "Now, just WAITING for order."));
 					} else {
 						user.setAvailable(AvailableState.NO_AVAILABLE);
-						usersDao.update(user);
 						return gson.toJson(new ReturnMessage(true, "You are not consired anymore as available."));
 					}
 					

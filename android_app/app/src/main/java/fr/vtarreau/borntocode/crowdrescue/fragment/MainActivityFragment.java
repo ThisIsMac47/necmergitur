@@ -42,16 +42,12 @@ public class MainActivityFragment extends android.app.Fragment implements View.O
 
     private String myLocation;
 
-    SharedPreferences sharedPreferences;
     ProgressDialog progressDialog;
     ReturnMessage returnMessage;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootview = inflater.inflate(R.layout.fragment_main, container, false);
-
-        sharedPreferences = getActivity().getSharedPreferences(MainActivity.sharedpreferencesString, Context.MODE_PRIVATE);
 
         Button sync_state = (Button) rootview.findViewById(R.id.syncState);
         Spinner dispo_spinner = (Spinner) rootview.findViewById(R.id.dispo_spinner);
@@ -72,22 +68,19 @@ public class MainActivityFragment extends android.app.Fragment implements View.O
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0)
-                    MainActivity.user_state = "1";
+                    MainActivity.user_state = 1;
                 else if (position == 1)
-                    MainActivity.user_state = "2";
+                    MainActivity.user_state = 2;
                 else
-                    MainActivity.user_state = "0";
+                    MainActivity.user_state = 0;
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-        if (sharedPreferences.getString(MainActivity.sp_Dispo, null) == null)
-            spinner.setSelection(0);
-        else {
-            spinner.setSelection(adapter.getPosition(sharedPreferences.getString(MainActivity.sp_Dispo, null)));
-        }
+
+        spinner.setSelection(MainActivity.user_state);
     }
 
     @Override
@@ -131,7 +124,7 @@ public class MainActivityFragment extends android.app.Fragment implements View.O
             protected String doInBackground(String... stuff) {
                 List<NameValuePair> params = new ArrayList<NameValuePair>();
                 params.add(new BasicNameValuePair("id", MainActivity.user_id));
-                params.add(new BasicNameValuePair("state", MainActivity.user_state));
+                params.add(new BasicNameValuePair("state", String.valueOf(MainActivity.user_state)));
                 params.add(new BasicNameValuePair("location", myLocation));
 
                 HttpConnection httpConnection = new HttpConnection();
@@ -182,12 +175,11 @@ public class MainActivityFragment extends android.app.Fragment implements View.O
             protected String doInBackground(String... stuff) {
                 List<NameValuePair> params = new ArrayList<NameValuePair>();
                 params.add(new BasicNameValuePair("id", MainActivity.user_id));
-                params.add(new BasicNameValuePair("state", MainActivity.user_state));
+                params.add(new BasicNameValuePair("state", String.valueOf(MainActivity.user_state)));
                 params.add(new BasicNameValuePair("location", myLocation));
 
-                HttpConnection httpConnection = new HttpConnection();
                 Gson gson = new Gson();
-                returnMessage = gson.fromJson(httpConnection.makeRequest(MainActivity.dispo, HttpConnection.HttpMethod.POST, params)
+                returnMessage = gson.fromJson(HttpConnection.makeRequest(MainActivity.dispo, HttpConnection.HttpMethod.POST, params)
                         , ReturnMessage.class);
 
                 getActivity().runOnUiThread(new Runnable() {

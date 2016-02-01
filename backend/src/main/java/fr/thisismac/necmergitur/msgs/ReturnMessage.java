@@ -1,4 +1,4 @@
-package fr.thisismac.negmergitur.msgs;
+package fr.thisismac.necmergitur.msgs;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

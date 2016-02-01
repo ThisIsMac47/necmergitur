@@ -45,17 +45,9 @@ import fr.vtarreau.borntocode.crowdrescue.msgs.ReturnMessage;
 
 public class MainActivity extends FragmentActivity {
 
-    public final static String sharedpreferencesString = "CrowdRescuePreferences";
-    public final static String sp_isLogged = "isLogged";
-    public final static String sp_Dispo= "isAvailable";
-    public final static String sp_Id = "myId";
-    public final static String sp_Username = "myUsername";
-
-
     public static String user_id = "";
     public static String user_name = "";
-    public static String user_state = "";
-    public static String user_ = "";
+    public static int user_state = 0;
 
 
     public final static String login = "users/login";
@@ -90,8 +82,6 @@ public class MainActivity extends FragmentActivity {
         fm.beginTransaction()
                 .add(R.id.fragment_container, fragment)
                 .commit();
-
-        sharedPreferences = this.getSharedPreferences(sharedpreferencesString, MODE_PRIVATE);
 
         checkConnection();
         Intent intenta = getIntent();
@@ -198,9 +188,8 @@ public class MainActivity extends FragmentActivity {
                 }
                 params.add(new BasicNameValuePair("has_stuff", Boolean.toString(tmp)));
 
-                HttpConnection httpConnection = new HttpConnection();
                 Gson gson = new Gson();
-                returnMessage = gson.fromJson(httpConnection.makeRequest(response, HttpConnection.HttpMethod.POST, params), ReturnMessage.class);
+                returnMessage = gson.fromJson(HttpConnection.makeRequest(response, HttpConnection.HttpMethod.POST, params), ReturnMessage.class);
                 System.out.println(returnMessage);
 
                 return null;
@@ -219,8 +208,8 @@ public class MainActivity extends FragmentActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
-                new IntentFilter(QuickStartPreferences.REGISTRATION_COMPLETE));
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver, new IntentFilter(QuickStartPreferences.REGISTRATION_COMPLETE));
+
     }
 
     @Override
@@ -239,8 +228,7 @@ public class MainActivity extends FragmentActivity {
         int resultCode = apiAvailability.isGooglePlayServicesAvailable(this);
         if (resultCode != ConnectionResult.SUCCESS) {
             if (apiAvailability.isUserResolvableError(resultCode)) {
-                apiAvailability.getErrorDialog(this, resultCode, PLAY_SERVICES_RESOLUTION_REQUEST)
-                        .show();
+                apiAvailability.getErrorDialog(this, resultCode, PLAY_SERVICES_RESOLUTION_REQUEST).show();
             } else {
                 Log.i(TAG, "This device is not supported.");
                 finish();
@@ -251,10 +239,10 @@ public class MainActivity extends FragmentActivity {
     }
 
     private void checkConnection() {
-        if (sharedPreferences == null || sharedPreferences.getBoolean(sp_isLogged, false) == false) {
-            Toast.makeText(this, "Erreur lors de la recuperation des donnees de l'application", Toast.LENGTH_LONG).show();
-                login();
-        }
+        if (user_id != null && user_id.length() != 0)
+            return ;
+        Toast.makeText(this, "Veuillez vous authentifiez pour utiliser l'application", Toast.LENGTH_LONG).show();
+        login();
     }
 
     public void login() {
@@ -274,6 +262,7 @@ public class MainActivity extends FragmentActivity {
                 AsyncTask<String, String, String> task = new AsyncTask<String, String, String>() {
 
                     ReturnMessage returnMessage;
+
                     @Override
                     protected void onPreExecute() {
                         super.onPreExecute();
@@ -293,11 +282,8 @@ public class MainActivity extends FragmentActivity {
                         params.add(new BasicNameValuePair("password", stuff[1]));
                         params.add(new BasicNameValuePair("registerId", registerId));
 
-                        HttpConnection httpConnection = new HttpConnection();
                         Gson gson = new Gson();
-                        returnMessage = gson.fromJson(httpConnection.makeRequest(login, HttpConnection.HttpMethod.POST, params), ReturnMessage.class);
-
-                        user_id = returnMessage.getMessage();
+                        returnMessage = gson.fromJson(HttpConnection.makeRequest(login, HttpConnection.HttpMethod.POST, params), ReturnMessage.class);
                         user_name = stuff[0];
                         return null;
                     }
@@ -305,12 +291,9 @@ public class MainActivity extends FragmentActivity {
                     @Override
                     protected void onPostExecute(String s) {
                         progressDialog.dismiss();
-                        if (returnMessage.isStatus()) {
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putBoolean(sp_isLogged, true);
-                            editor.putString(sp_Id, returnMessage.getMessage());
-                            editor.commit();
-                        } else
+                        if (returnMessage.isStatus())
+                            user_id = returnMessage.getMessage();
+                        else
                             login();
                     }
                 };

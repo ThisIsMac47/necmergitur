@@ -21,7 +21,7 @@ import java.util.List;
 
 public class HttpConnection {
 
-    public final static String API_URL = "http://10.12.1.121:4567/";
+    public final static String API_URL = "http://192.168.0.42:4242/";
     public final static Gson gson = new GsonBuilder().create();
 
     public static String makeRequest(String route, HttpMethod method, List<NameValuePair> params) {
